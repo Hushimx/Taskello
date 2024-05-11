@@ -19,10 +19,10 @@ export default function Members({
   currentBoard,
   socket,
   user,
+  userRole,
 }) {
   const [users, setUsers] = React.useState(null);
   const [invitations, setInvitations] = React.useState(null);
-  const userRole = React.useRef("user");
   const inviteInput = React.useRef(null);
   React.useEffect(() => {
     socket.on("membersUpdate", () => {
@@ -41,6 +41,13 @@ export default function Members({
     socket.on("getBoardInvitations", (invs) => {
       setInvitations(invs);
     });
+    return () => {
+      socket.off("membersUpdate");
+      socket.off("getUsers");
+
+      socket.off("getBoardInvitations");
+      socket.off("boardInvitationsUpdate");
+    };
   }, []);
   return (
     <>
@@ -84,7 +91,7 @@ export default function Members({
                               Kick
                             </span>
                           </>
-                        ) : userRole.current == "owner" ? (
+                        ) : u.role == "owner" ? (
                           <>
                             <span className=" tw-bg-red-500 tw-ms-auto tw-me-2 tw-rounded-md">
                               Owner
@@ -122,23 +129,16 @@ export default function Members({
                 Invite
               </button>
             </div>
-            <div className=" tw-w-full tw-flex tw-justify-center">
+            <div className=" tw-w-full tw-flex tw-justify-center tw-flex-col tw-items-center tw-gap-1">
               {!invitations ? (
                 "No Invitations"
               ) : (
                 <>
                   {invitations.map((invite) => {
                     return (
-                      <div className=" tw-flex tw-w-56 tw-bg-boardBG tw-text-primColor tw-h-10 tw-items-center tw-rounded-md iconContainer ">
+                      <div className=" tw-flex tw-w-fit tw-overflow-hidden tw-px-3 tw-bg-boardBG tw-text-primColor tw-h-10 tw-items-center tw-rounded-md iconContainer ">
                         <PersonIcon />
                         <span>{invite.recipientEmail}</span>
-                        {userRole.current == "owner" && (
-                          <>
-                            <span className="iconDiv tw-text-primColor tw-cursor-pointer tw-text-red-500">
-                              Canel
-                            </span>
-                          </>
-                        )}
                       </div>
                     );
                   })}

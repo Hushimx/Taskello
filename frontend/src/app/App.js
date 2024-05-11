@@ -31,7 +31,7 @@ function App({ useNavigate, user, setUser }) {
     }, 600);
   }
   React.useEffect(() => {
-    const Socket = io(`http://${process.env.SERVER_URL}`, {
+    const Socket = io(`http://127.0.0.1:8000`, {
       withCredentials: true,
     });
     Socket.on("connect", (t) => {
@@ -60,6 +60,7 @@ function App({ useNavigate, user, setUser }) {
           navigate("/signin");
         }, 2000);
       } else {
+        console.log(err);
         Store.addNotification({
           title: "Ops!",
           message: "Something Went Wrong",

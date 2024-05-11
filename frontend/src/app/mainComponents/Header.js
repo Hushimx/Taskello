@@ -14,6 +14,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import DeleteIcon from "@mui/icons-material/Delete";
 import WallpaperIcon from "@mui/icons-material/Wallpaper";
 import GroupIcon from "@mui/icons-material/Group";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 export function Header({
   boards,
   currentBoard,
@@ -24,8 +25,11 @@ export function Header({
 }) {
   const [showBoardMenu, setShowBoardMenu] = React.useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = React.useState(false);
+  const [leavePromit, setLeavePromit] = React.useState(false);
   const [isBgOpen, setIsBgOpen] = React.useState(false);
   const [isMembersOpen, setIsMembersOpen] = React.useState(false);
+  const userRole = React.useRef("user");
+
   const handleClose = () => setShowBoardMenu(false);
   return (
     <header
@@ -45,6 +49,7 @@ export function Header({
         currentBoard={currentBoard}
         socket={socket}
         user={user}
+        userRole={userRole}
       />
 
       <DeletePrompt
@@ -74,7 +79,7 @@ export function Header({
         socket={socket}
       />
       <EditText
-        inputClassName="taskInput tw-w-36 tw-text-sm tw-h-8 "
+        inputClassName="taskInput tw-w-96 tw-text-sm tw-h-8 "
         placeholder={currentBoard.title}
         defaultValue={currentBoard.title}
         onSave={(e) => {
@@ -83,6 +88,46 @@ export function Header({
           }
         }}
       />
+      <Popup
+        open={leavePromit}
+        onClose={() => setLeavePromit(false)}
+        closeOnDocumentClick
+        modal
+        nested
+      >
+        {(close) => (
+          <div
+            className={`model ${theme.current} tw-bg-asideBG tw-flex tw-flex-col tw-items-center`}
+            style={{ width: "30rem", minHeight: "13rem" }}
+          >
+            <h3 className=" tw-text-red-500">Leave this Board?</h3>
+            <p className=" tw-text-primColor">
+              Are you sure you want to Leave this Board? This action cannot be
+              reversed.
+            </p>
+            <div>
+              <button
+                className=" mainBtn tw-w-24"
+                onClick={() => {
+                  socket.emit("leaveBoard", currentBoardIId);
+                  close();
+                }}
+              >
+                Leave
+              </button>
+              <button
+                className="  tw-w-24 tw-text-primColor"
+                onClick={() => {
+                  close();
+                  setShowBoardMenu(true);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </Popup>
 
       <button
         onClick={() => {
@@ -123,16 +168,29 @@ export function Header({
             <WallpaperIcon />
             Background
           </div>
-          <div
-            className=" tw-h-16  tw-bg- tw-border-2 tw-flex tw-justify-start tw-items-center tw-ps-5 tw-gap-1 tw-shadow-sm tw-cursor-pointer tw-mt-4"
-            onClick={() => {
-              setIsDeleteOpen(true);
-              handleClose();
-            }}
-          >
-            <DeleteIcon />
-            Delete
-          </div>
+          {userRole.current == "owner" ? (
+            <div
+              className=" tw-h-16  tw-bg- tw-border-2 tw-flex tw-justify-start tw-items-center tw-ps-5 tw-gap-1 tw-shadow-sm tw-cursor-pointer tw-mt-4"
+              onClick={() => {
+                setIsDeleteOpen(true);
+                handleClose();
+              }}
+            >
+              <DeleteIcon />
+              Delete
+            </div>
+          ) : (
+            <div
+              className=" tw-h-16  tw-bg- tw-border-2 tw-flex tw-justify-start tw-items-center tw-ps-5 tw-gap-1 tw-shadow-sm tw-cursor-pointer tw-mt-4"
+              onClick={() => {
+                setLeavePromit(true);
+                handleClose();
+              }}
+            >
+              <ExitToAppIcon />
+              Leave
+            </div>
+          )}
         </Offcanvas.Body>
       </Offcanvas>
     </header>

@@ -78,17 +78,14 @@ export default function Register({ Link, useNavigate, user }) {
                 }}
                 validationSchema={valiSchema}
                 onSubmit={async (formData) => {
-                  let response = await fetch(
-                    `http://${process.env.SERVER_URL}/register`,
-                    {
-                      body: JSON.stringify(formData),
-                      method: "post",
-                      headers: {
-                        "Content-Type": "application/json; charset=UTF-8",
-                      },
-                      credentials: "include",
-                    }
-                  );
+                  let response = await fetch(`http://127.0.0.1:8000/register`, {
+                    body: JSON.stringify(formData),
+                    method: "post",
+                    headers: {
+                      "Content-Type": "application/json; charset=UTF-8",
+                    },
+                    credentials: "include",
+                  });
                   response = await response.json();
                   if (response.status == "success") {
                     Store.addNotification({

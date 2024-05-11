@@ -74,17 +74,14 @@ export default function Login({ Link, useNavigate, user }) {
                 }}
                 validationSchema={valiSchema}
                 onSubmit={async (formData) => {
-                  let response = await fetch(
-                    `http://${process.env.SERVER_URL}/login`,
-                    {
-                      body: JSON.stringify(formData),
-                      method: "post",
-                      headers: {
-                        "Content-Type": "application/json; charset=UTF-8",
-                      },
-                      credentials: "include",
-                    }
-                  );
+                  let response = await fetch(`http://127.0.0.1:8000/login`, {
+                    body: JSON.stringify(formData),
+                    method: "post",
+                    headers: {
+                      "Content-Type": "application/json; charset=UTF-8",
+                    },
+                    credentials: "include",
+                  });
                   response = await response.json();
                   if (response.status == "success") {
                     Store.addNotification({
@@ -146,7 +143,7 @@ export default function Login({ Link, useNavigate, user }) {
                     )}
                     <Field
                       name="email"
-                      placeholder="Username"
+                      placeholder="Email"
                       class={`flex tw-px-3 tw-py-2 md:tw-px-4 md:tw-py-3 tw-border-2 tw-border-black tw-rounded-lg tw-font-medium placeholder:tw-font-normal tw-w-full tw-mb-5 ${
                         touched.email && errors.email
                           ? "tw-border tw-border-red-500"

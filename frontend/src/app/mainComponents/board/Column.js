@@ -106,7 +106,7 @@ export default function Column({
               {(tasksDroppableProvider) => {
                 return (
                   <div
-                    className="dropArea tw-overflow-y-auto tw-max-h-32"
+                    className="dropArea tw-overflow-y-auto tw-overflow-x-hidden tw-max-h-32"
                     ref={tasksDroppableProvider.innerRef}
                     {...tasksDroppableProvider.droppableProps}
                     {...tasksDroppableProvider.droppableProps}
