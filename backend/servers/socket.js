@@ -25,7 +25,7 @@ const unsplash = createApi({
 });
 const io = new Server(httpServer, {
   cors: {
-    origin: `http://${process.env.origin}`,
+    origin: `${process.env.origin}`,
     credentials: true,
   },
 });
@@ -46,8 +46,7 @@ io.use(async (socket, next) => {
         throw error("jwt error");
       }
     } catch (e) {
-      let error = new Error();
-      error.data = { content: "You have to login first", error: e };
+      let error = new Error("noCookies");
       next(error);
     }
   } else {

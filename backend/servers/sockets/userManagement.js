@@ -6,6 +6,7 @@ const {
   inviteHelper,
   getSenderAndBoardNames,
   kickUser,
+  leaveBoard,
 } = require("../../utils/helpers");
 const sockets = require("./socketsOnline");
 
@@ -134,6 +135,15 @@ module.exports = (io, socket, user) => {
       sockets[userId].emit("boardDeleted");
     } catch (error) {
       console.log(error);
+      socket.emit("error", error.message);
+    }
+  });
+  socket.on("leaveBoard", async (boardId) => {
+    try {
+      await leaveBoard(boardId, user);
+      io.to(boardId).emit("membersUpdate");
+      socket.emit("boardDeleted");
+    } catch (error) {
       socket.emit("error", error.message);
     }
   });

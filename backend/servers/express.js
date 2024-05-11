@@ -17,9 +17,18 @@ const httpServer = createServer(app);
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000",
+    origin: `http://127.0.0.1:3000`,
     methods: ["GET", "POST"],
     credentials: true,
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+    ], // Example headers, adjust as needed
+
+ // Example headers, adjust as needed
+
   })
 );
 app.use("/download", express.static(__dirname + "/../public"));
@@ -38,7 +47,7 @@ app.all("/test", async (req, res) => {
 });
 app.get("/logout", (req, res) => {
   if (req.cookies.token) {
-    res.clearCookie("token");
+    res.clearCookie("token", { domain: "test.soft-fire.com" });
     res.json({ status: true });
   } else {
     res.json({ status: false });

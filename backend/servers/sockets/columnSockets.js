@@ -67,8 +67,18 @@ module.exports = (io, socket, user) => {
     try {
       let board = await CheckIsMember(boardId, user);
       if (!board) throw new Error("Can't find Board");
-      let [deletedColumn] = board.columns.splice(d.source.index, 1);
-      board.columns.splice(d.destination.index, 0, deletedColumn);
+      let sourceColumnIdx = board.columns.findIndex(
+        (col) => col.id === d.draggableId
+      );
+      if (sourceColumnIdx === -1)
+        throw new Error("Can't find column with this id");
+
+      let [deletedColumn] = board.columns.splice(sourceColumnIdx, 1);
+      if (d.destination.index > board.columns.length) {
+        board.columns.push(deletedColumn);
+      } else {
+        board.columns.splice(d.destination.index, 0, deletedColumn);
+      }
       await board.save();
       const { id, title, columns, background } = board;
       io.to(board.id).emit("boardUpdate", { id, title, columns, background });

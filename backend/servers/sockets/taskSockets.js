@@ -33,15 +33,24 @@ module.exports = (io, socket, user) => {
       let sourceColumn = board.columns.find(
         (col) => col.id === d.source.droppableId
       );
-      let sourceTask = sourceColumn.tasks.find(
+      if (!sourceColumn) throw new Error("Can't find column with this id");
+
+      let sourceTaskIdx = sourceColumn.tasks.findIndex(
         (task) => task.id === d.draggableId
       );
+      if (sourceTaskIdx === -1) throw new Error("Can't find task with this id");
 
       let destinationColumn = board.columns.find(
         (col) => col.id === d.destination.droppableId
       );
-      let [df] = sourceColumn.tasks.splice(d.source.index, 1);
-      destinationColumn.tasks.splice(d.destination.index, 0, sourceTask);
+      if (!destinationColumn) throw new Error("Destination column not found");
+      let [deletedTask] = sourceColumn.tasks.splice(sourceTaskIdx, 1);
+      if (d.destination.index > destinationColumn.tasks.length) {
+        destinationColumn.tasks.push(deletedTask);
+      } else {
+        destinationColumn.tasks.splice(d.destination.index, 0, deletedTask);
+      }
+
       await board.save();
       const { id, title, columns, background } = board;
       io.to(board.id).emit("boardUpdate", { id, title, columns, background });
