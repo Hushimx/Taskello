@@ -1,3 +1,5 @@
+require("dotenv").config({ path: "../.env" });
+
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
@@ -51,7 +53,7 @@ router.post("/", async (req, res) => {
           { expiresIn: "1h" }
         );
         res.cookie("token", token, {
-          domain: "127.0.0.1",
+          domain: `${process.env.origin}`,
           sameSite: "strict",
           httpOnly: true,
           maxAge: 3600000,

@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../.env" });
 const jwt = require("jsonwebtoken");
 const helpers = require("../utils/helpers");
 
@@ -14,7 +15,7 @@ module.exports.registerLogic = async (req, res) => {
         { expiresIn: "1h" }
       );
       res.cookie("token", token, {
-        domain: "127.0.0.1",
+        domain: `${process.env.origin}`,
         sameSite: "strict",
         httpOnly: true,
         maxAge: 3600000,

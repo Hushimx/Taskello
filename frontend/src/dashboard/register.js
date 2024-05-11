@@ -79,7 +79,7 @@ export default function Register({ Link, useNavigate, user }) {
                 validationSchema={valiSchema}
                 onSubmit={async (formData) => {
                   let response = await fetch(
-                    "http://test.soft-fire.com:8000/register",
+                    `http://${process.env.SERVER_URL}/register`,
                     {
                       body: JSON.stringify(formData),
                       method: "post",

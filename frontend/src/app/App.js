@@ -31,7 +31,7 @@ function App({ useNavigate, user, setUser }) {
     }, 600);
   }
   React.useEffect(() => {
-    const Socket = io("http://test.soft-fire.com:8000", {
+    const Socket = io(`http://${process.env.SERVER_URL}`, {
       withCredentials: true,
     });
     Socket.on("connect", (t) => {

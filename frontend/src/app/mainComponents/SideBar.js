@@ -365,7 +365,7 @@ export function SideBar({
                 className=" tw-text-red-500 tw-cursor-pointer  tw-duration-300"
                 onClick={async () => {
                   let response = await fetch(
-                    "http://test.soft-fire.com:8000/logout",
+                    `http://${process.env.SERVER_URL}/logout`,
                     {
                       method: "get",
                       headers: {

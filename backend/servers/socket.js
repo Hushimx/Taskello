@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../../.env" });
+require("dotenv").config({ path: "../.env" });
 const { Server } = require("socket.io");
 const { httpServer } = require("./express");
 const jwt = require("jsonwebtoken");
@@ -21,11 +21,11 @@ const {
   getSenderAndBoardNames,
 } = require("../utils/helpers");
 const unsplash = createApi({
-  accessKey: "fk3wvnIsTbubtXo5RlFsrQv3RRMkAZOC0wxsFlCcSAg",
+  accessKey: process.env.unSplachAccessKey,
 });
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://127.0.0.1:3000",
+    origin: `http://${process.env.origin}`,
     credentials: true,
   },
 });

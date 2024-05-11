@@ -75,7 +75,7 @@ export default function Login({ Link, useNavigate, user }) {
                 validationSchema={valiSchema}
                 onSubmit={async (formData) => {
                   let response = await fetch(
-                    "http://test.soft-fire.com:8000/login",
+                    `http://${process.env.SERVER_URL}/login`,
                     {
                       body: JSON.stringify(formData),
                       method: "post",
