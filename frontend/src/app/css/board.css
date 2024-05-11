@@ -1,0 +1,71 @@
+.taskInput {
+  color: var(--prim-text-color);
+  font-size: 2rem;
+}
+input.taskInput,
+textarea.taskInput {
+  background-color: #191923;
+  resize: none;
+}
+.taskInput:focus {
+  text-indent: 16px;
+  color: white;
+  border: 1px solid white;
+  /* height: 2rem !important; */
+  box-shadow: 0px 0px 7px 0px #758093 inset;
+}
+textarea.taskInput {
+  font-size: 20px;
+}
+.parent {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 14rem;
+  margin-left: 1rem;
+}
+.child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(43, 45, 55);
+  color: var(--text-color);
+  box-shadow: rgba(54, 78, 126, 0.1) 0px 4px 6px;
+  width: 14rem;
+  height: 5rem;
+  padding-left: 11px;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.child span {
+  transition: 0.2s ease-in-out;
+}
+.child:hover span {
+  color: #635fc7;
+}
+.dropArea {
+  min-height: 60vh;
+  min-width: 8rem;
+}
+
+.newCol {
+  background-color: var(--newcol-bg);
+  color: var(--text-color);
+}
+
+/* SubTask */
+.subTask {
+  display: flex;
+  justify-content: flex-start;
+  height: 3rem;
+  background-color: #20212c;
+  color: white;
+  border-radius: 18px;
+  padding: 12px;
+}
+.subTask p {
+  color: white;
+}
+.ql-toolbar.ql-snow {
+  background-color: white;
+}

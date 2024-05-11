@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Sniglet", system-ui !important;
+  font-style: normal !important;
+}
+.dark {
+  --board-bg-color: rgb(32 33 44);
+  --prim-text-color: white;
+  --sec-text-color: rgb(131 143 163);
+  --asaide-bg: rgb(44, 44, 56);
+  --newcol-bg: rgb(35 35 46);
+}
+.light {
+  --board-bg-color: rgb(255 255 255);
+  --text-color: black;
+  --asaide-bg: rgb(255 255 255);
+  --newcol-bg: rgb(238 242 251);
+}
+/*    fade in animation       */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.board {
+  background-color: var(--board-bg-color);
+  height: 90vh;
+  overflow: scroll;
+}
+
+aside {
+  background-color: var(--asaide-bg);
+}
+header {
+  background-color: var(--asaide-bg);
+  border: 1px solid #242431;
+}
+main {
+  background-color: var(--board-bg-color);
+  position: absolute;
+  width: 100%;
+  z-index: 60;
+}
+.nav-item {
+  color: var(--header-color);
+}
+.h-text {
+  color: var(--main-color);
+}
+
+.mainBtn {
+  height: 2.5rem;
+  border-radius: 16px;
+  background-color: #9a85f4;
+  color: white;
+  transition-duration: 0.5s;
+}
+.mainBtn:hover {
+  background-color: white;
+  color: black;
+}
+.mainInput {
+  background-color: transparent;
+  border: 1px solid #3b3b47;
+  height: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.375rem;
+}
+main.active {
+  animation-name: GrowingCircle;
+  animation-duration: 0.9s;
+}
+
+.bg-transition {
+  transition: background-color 0.5s ease;
+}
+.tranform-transition {
+  transition: transform 0.5s ease; /* Transition duration for transform changes */
+}
+.height-transition {
+  transition: height 0.5s ease; /* Transition duration for transform changes */
+}
+/*
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/*
+body {
+  min-height: 100vh;
+  background-color: black !important;
+  position: relative;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-size: 16px;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  z-index: 0;
+  position: absolute;
+}
+main.active {
+  animation-name: GrowingCircle;
+  animation-duration: 1s;
+}
+header {
+  display: flex;
+  flex-direction: column;
+}
+h1 {
+  text-indent: 1rem;
+}
+aside {
+  background-color: rgb(44, 44, 56);
+}
+aside div {
+  background-color: var(--asaide-color);
+  color: white;
+}
+
+article {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem;
+  align-self: flex-end;
+  width: 85%;
+  height: 100%;
+  color: white;
+  background-color: var(--main-bg-color);
+}
+.active,
+.active:hover {
+  background-color: #635ec5 !important;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2.5rem !important;
+  width: 14rem;
+  margin-left: -20px;
+  border-radius: 0 2rem 2rem 0;
+  transition-duration: 0.4s;
+}
+.nav-item:not(.active) {
+  color: #828fa3;
+}
+.nav-item:not(.active):hover {
+  background-color: white;
+  color: #635ec5;
+}
+.nav-item:not(.active):hover i {
+  color: #828fa3;
+}
+#newboardbutton i {
+  color: #635ec5;
+}
+i {
+  display: inline !important;
+  position: absolute;
+  transition-duration: 0.3s;
+  margin-left: 12px;
+  font-size: 21px !important;
+  color: #828fa3;
+}
+.mainbtn {
+  background-color: #645fc6 !important;
+  color: white !important;
+  border-radius: 1rem !important;
+}
+.bordname {
+  text-indent: 3rem;
+}
+.new {
+  color: #635dbe;
+  height: 4.5rem !important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 14rem;
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+.newcol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  min-width: 280px;
+  background: #22232f;
+  border-radius: 1rem;
+} */
+.popup {
+  height: fit-content;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #191923;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  z-index: 1;
+  padding-left: 1rem;
+  padding: 2rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+p {
+  margin: 0;
+}
+/* textarea {
+  width: 300px !important;
+  height: 100px !important;
+} */
+label {
+  color: white;
+}
+#escapeBlock {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+}
+
+.threedots {
+  all: unset;
+  /* background-image: url(../assets/3dots.svg); */
+  width: 5px;
+  height: 15px;
+  background-repeat: no-repeat;
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(259deg)
+    brightness(103%) contrast(104%);
+}
+
+/* Check list */
+
+.checkBox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: inherit;
+}
+
+/* Hide the browser's default checkbox */
+.checkBox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkBox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkBox input:checked ~ .checkmark {
+  background-color: #635ec5;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkBox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkBox .checkmark:after {
+  left: 9px;
+  top: 2px;
+  width: 8px;
+  height: 15px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.iconContainer {
+  position: relative;
+}
+.iconDiv {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.iconContainer:hover .iconDiv {
+  opacity: 1;
+}
+
+.icon {
+  cursor: pointer;
+}
+.showSideBar {
+  position: absolute;
+  left: 0%;
+  bottom: 16%;
+  width: 5em;
+  height: 3em;
+  border-top-right-radius: 1.75em;
+  border-bottom-right-radius: 1.75em;
+}
+/* Width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2c2c38;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@keyframes GrowingCircle {
+  from {
+    clip-path: circle(0% at 0% 100%);
+  }
+  75% {
+    clip-path: circle(80% at 20% 20%);
+  }
+  to {
+    clip-path: circle(100% at 50% 50%);
+  }
+}
+.text-invert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
