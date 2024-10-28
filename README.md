@@ -12,7 +12,7 @@ Welcome to Taskello, a comprehensive Kanban task management application designed
 
 ## Getting Started 🏃‍♂️
 
-To get started with Taskello, visit our [live demo](http://test.soft-fire.com) and explore the features for yourself!
+To get started with Taskello, visit our [live demo](http://taskello.hashim.pro) and explore the features for yourself!
 
 ## Installation 🛠️
 
@@ -29,7 +29,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact 📞
 
-If you have any questions, suggestions, or just want to say hello, feel free to reach out. You can contact us at [your-email@example.com](mailto:hashimjilani66@gmail.com).
+If you have any questions, suggestions, or just want to say hello, feel free to reach out. You can contact us at [hashimjilani66@gmail.com](mailto:hashimjilani66@gmail.com).
 
 ---
 
